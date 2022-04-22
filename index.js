@@ -2,7 +2,7 @@ const express = require('express')
 
 require('dotenv').config()
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3001
 
 app.get('/create', (req, res) => {
     /* if (req.headers.authorization !== 'Basic QXp1cmVEaWFtb25kOmh1bnRlcjI=') {
