@@ -35,12 +35,13 @@ app.get('/auth/settoken', oidc.ensureAuthenticated(), (req, res) => {
     if (req.userinfo) { // or req.isAuthenticated()
         res.send(`Hi ${req.userinfo.name}! you are logged in`);
     } else {
-        const jwt = require('njwt')
-        const claims = { iss: 'exp', sub: 'manish' }
-        const token = jwt.create(claims, 'ExperianJWTKey')
+        const jwt = require('njwt');
+        const userContext = req.userContext;
+        const claims = { iss: 'exp', sub: userContext.userinfo.name }
+        const token = jwt.create(claims, process.env.SECRET_KEY)
         token.setExpiration(new Date().getTime() + 60 * 1000)
 
-        res.cookie('token', token.compact(), { maxAge: 900000, httpOnly: true })
+        res.cookie('jwt', token.compact(), { maxAge: 900000, httpOnly: true })
 
         console.log('cookie have created successfully');
         res.send(req.headers);
