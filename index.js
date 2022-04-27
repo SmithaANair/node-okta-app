@@ -23,8 +23,8 @@ const oidc = new ExpressOIDC({
 
 app.use(oidc.router)
 
-app.get('/auth/info', (req, res) => {
-    res.send(`Application is working fine`);
+app.get('/auth/info', (req, res) => { 
+    res.send(`Application is working fine - redirect URI: ${process.env.HOST_URL}/authorization-code/callback *** OKTA_ORG_URL: ${process.env.OKTA_ORG_URL}`);
 })
 
 app.get('/auth/verify/:token', (req, res) => {
