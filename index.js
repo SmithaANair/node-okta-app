@@ -37,7 +37,7 @@ app.get('/auth/settoken', oidc.ensureAuthenticated(), (req, res) => {
     } else {
         const jwt = require('njwt');
         const userContext = req.userContext;
-        const claims = { iss: 'exp', sub: userContext.userinfo.name }
+        const claims = { iss: 'epp', sub: userContext.userinfo.name }
         const token = jwt.create(claims, process.env.SECRET_KEY)
         token.setExpiration(new Date().getTime() + 60 * 1000)
 
